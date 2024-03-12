@@ -10,7 +10,7 @@ echo "ISCSI Modules Added to Dracut"
 sudo sed -i '/^timeout=/ s/=.*/=5/' /boot/grub/grub.conf
 sudo sed -i '/^splashimage/ s/^/#/' /boot/grub/grub.conf
 sudo sed -i '1i serial --unit=0 --speed=9600 --word=8 --parity=no --stop=1\nterminal --timeout=5 serial console' /boot/grub/grub.conf
-sudo sed -i '/^kernel/ s/$/ console=ttyS0,9600 netroot=iscsi:@169.254.0.2::::iqn.2015-02.oracle.boot:uefi iscsi_initiator=iqn.2015-02.oracle.boot:instance/' /boot/grub/grub.conf
+sudo sed -i '/^kernel/ s/$/ console=ttyS0,9600/' /boot/grub/grub.conf
 echo "Grub Config Updated"
 sudo stty -F /dev/ttyS0 speed 9600
 dmesg | grep console
