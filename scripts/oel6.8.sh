@@ -3,7 +3,9 @@ echo "Developed by Christopher M Johnston"
 echo "05/23/2020"
 echo "Configures RHEL 6.8 to be moved to OCI Bare Metal Infrastructure"
 sudo ln -sf /etc/systemd/system/multi-user.target /etc/systemd/system/default.target
-sudo yum install dracut-network iscsi-initiator-utils -y
+sudo yum install dracut-network iscsi-initiator-utils xe-guest-utilities -y
+sudo service xe-linux-distribution start
+sudo chkconfig xe-linux-distribution on
 echo "Dependencies Installed"
 echo 'add_dracutmodules+="iscsi"' >> /etc/dracut.conf
 echo "ISCSI Modules Added to Dracut"
