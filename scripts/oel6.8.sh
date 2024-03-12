@@ -49,10 +49,6 @@ if [ ! -f "/etc/ssh/ssh_host_ecdsa_key" ]; then
     sudo ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' -q
 fi
 
-if [ ! -f "/etc/ssh/ssh_host_ed25519_key" ]; then
-    sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N '' -q
-fi
-
 generate_ssh_host_key() {
     local key_type="$1"
     local key_file="/etc/ssh/ssh_host_${key_type}_key"
