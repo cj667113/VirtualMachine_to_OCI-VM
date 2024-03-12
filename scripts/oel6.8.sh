@@ -22,9 +22,21 @@ for file in /etc/sysconfig/network-scripts/ifcfg-*; do
     fi
 done
 echo "Scrubbed Hard Coded MAC"
-# Create dhclient startup script
-echo "@reboot root /sbin/dhclient" | sudo crontab -
-echo "DHCLIENT Set for Startup"
+
+sudo tee /etc/sysconfig/network-scripts/ifcfg-eth0 >/dev/null <<EOF
+DEVICE=eth0
+TYPE=Ethernet
+ONBOOT=yes
+BOOTPROTO=dhcp
+EOF
+
+sudo tee /etc/sysconfig/network-scripts/ifcfg-eth1 >/dev/null <<EOF
+DEVICE=eth1
+TYPE=Ethernet
+ONBOOT=yes
+BOOTPROTO=dhcp
+EOF
+
 sudo stty -F /dev/ttyS0 speed 9600
 dmesg | grep console
 echo "Executing Dracut"
