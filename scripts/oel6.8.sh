@@ -22,6 +22,30 @@ for file in /etc/sysconfig/network-scripts/ifcfg-*; do
     fi
 done
 echo "Scrubbed Hard Coded MAC"
+# Create dhclient startup script
+sudo tee /etc/init.d/start_dhclient <<EOL
+#!/bin/bash
+#
+# Start dhclient at boot time
+#
+
+case "\$1" in
+start)
+    echo "Starting dhclient"
+    /sbin/dhclient -v
+    ;;
+*)
+    echo "Usage: \$0 {start}"
+    exit 1
+    ;;
+esac
+
+exit 0
+EOL
+sudo chmod +x /etc/init.d/start_dhclient
+sudo chkconfig --add start_dhclient
+sudo chkconfig start_dhclient on
+echo "DHCLIENT Set for Startup"
 sudo stty -F /dev/ttyS0 speed 9600
 dmesg | grep console
 echo "Executing Dracut"
