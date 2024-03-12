@@ -10,7 +10,7 @@ echo 'add_dracutmodules+="iscsi"' >> /etc/dracut.conf
 echo "ISCSI Modules Added to Dracut"
 sudo sed -i '/^timeout=/ s/=.*/=2/' /boot/grub/grub.conf
 sudo sed -i '/^splashimage/ s/^/#/' /boot/grub/grub.conf
-sudo sed -i 's/\(kernel.*\)/\1 ip=dhcp console=ttyS0,9600/' /boot/grub/grub.conf
+sudo sed -i 's/\(kernel.*\)/\1 console=ttyS0,9600/' /boot/grub/grub.conf
 echo "Grub Config Updated"
 echo "Scrubbing Hard Coded MAC"
 for file in /etc/sysconfig/network-scripts/ifcfg-*; do
