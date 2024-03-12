@@ -37,18 +37,6 @@ ONBOOT=yes
 BOOTPROTO=dhcp
 EOF
 
-if [ ! -f "/etc/ssh/ssh_host_rsa_key" ]; then
-    sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' -q
-fi
-
-if [ ! -f "/etc/ssh/ssh_host_dsa_key" ]; then
-    sudo ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N '' -q
-fi
-
-if [ ! -f "/etc/ssh/ssh_host_ecdsa_key" ]; then
-    sudo ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' -q
-fi
-
 generate_ssh_host_key() {
     local key_type="$1"
     local key_file="/etc/ssh/ssh_host_${key_type}_key"
