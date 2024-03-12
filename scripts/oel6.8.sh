@@ -37,6 +37,42 @@ ONBOOT=yes
 BOOTPROTO=dhcp
 EOF
 
+if [ ! -f "/etc/ssh/ssh_host_rsa_key" ]; then
+    sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' -q
+fi
+
+if [ ! -f "/etc/ssh/ssh_host_dsa_key" ]; then
+    sudo ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N '' -q
+fi
+
+if [ ! -f "/etc/ssh/ssh_host_ecdsa_key" ]; then
+    sudo ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '' -q
+fi
+
+if [ ! -f "/etc/ssh/ssh_host_ed25519_key" ]; then
+    sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N '' -q
+fi
+
+generate_ssh_host_key() {
+    local key_type="$1"
+    local key_file="/etc/ssh/ssh_host_${key_type}_key"
+
+    if [ ! -f "$key_file" ]; then
+        sudo ssh-keygen -t "$key_type" -f "$key_file" -N '' -q
+    fi
+}
+
+generate_ssh_host_key "rsa"
+generate_ssh_host_key "dsa"
+generate_ssh_host_key "ecdsa"
+
+#Uncomment
+sudo sed -i 's/#HostKey/HostKey/' /etc/ssh/sshd_config
+sudo sed -i '/^HostKey.*rsa/d' /etc/ssh/sshd_config
+sudo sed -i '/^HostKey.*dsa/d' /etc/ssh/sshd_config
+#Append
+echo "HostKey /etc/ssh/ssh_host_ecdsa_key" | sudo tee -a /etc/ssh/sshd_config
+
 sudo stty -F /dev/ttyS0 speed 9600
 dmesg | grep console
 echo "Executing Dracut"
