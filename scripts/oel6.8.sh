@@ -4,9 +4,7 @@ echo "03/11/2024"
 echo "Currently in BETA"
 echo "Configures OEL 6.8 to be moved to OCI VM Infrastructure"
 sudo chkconfig --level 3 multiuser
-sudo yum install dracut-network iscsi-initiator-utils xe-guest-utilities -y
-sudo service xe-linux-distribution start
-sudo chkconfig xe-linux-distribution on
+sudo yum install dracut-network iscsi-initiator-utils -y
 echo "Dependencies Installed"
 echo 'add_dracutmodules+="iscsi"' >> /etc/dracut.conf
 echo "ISCSI Modules Added to Dracut"
