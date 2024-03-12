@@ -23,7 +23,7 @@ for file in /etc/sysconfig/network-scripts/ifcfg-*; do
 done
 echo "Scrubbed Hard Coded MAC"
 # Create dhclient startup script
-echo "@reboot /sbin/dhclient" | sudo crontab -
+echo "@reboot root /sbin/dhclient" | sudo crontab -
 echo "DHCLIENT Set for Startup"
 sudo stty -F /dev/ttyS0 speed 9600
 dmesg | grep console
