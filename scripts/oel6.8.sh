@@ -8,7 +8,7 @@ sudo yum install dracut-network iscsi-initiator-utils -y
 echo "Dependencies Installed"
 echo 'add_dracutmodules+="iscsi"' >> /etc/dracut.conf
 echo "ISCSI Modules Added to Dracut"
-sudo sed -i '/^timeout=/ s/=.*/=5/' /boot/grub/grub.conf
+sudo sed -i '/^timeout=/ s/=.*/=2/' /boot/grub/grub.conf
 sudo sed -i '/^splashimage/ s/^/#/' /boot/grub/grub.conf
 sudo sed -i 's/\(kernel.*\)/\1 console=ttyS0,9600/' /boot/grub/grub.conf
 echo "Grub Config Updated"
