@@ -14,12 +14,10 @@ sudo sed -i 's/\(kernel.*\)/\1 console=ttyS0,9600/' /boot/grub/grub.conf
 echo "Grub Config Updated"
 sudo stty -F /dev/ttyS0 speed 9600
 dmesg | grep console
-sudo chkconfig --level 2345 serial on
-sudo service serial start
 echo "Executing Dracut"
-for file in $(find /boot -name "vmlinuz-*" -and -not -name "vmlinuz-*rescue*") ; do
-    sudo dracut --force --no-hostonly /boot/initramfs-${file:14}.img ${file:14}
-done
-echo "Dracut Executed"
-echo "Shutting Down"
-sudo halt -p
+#for file in $(find /boot -name "vmlinuz-*" -and -not -name "vmlinuz-*rescue*") ; do
+#    sudo dracut --force --no-hostonly /boot/initramfs-${file:14}.img ${file:14}
+#done
+#echo "Dracut Executed"
+#echo "Shutting Down"
+#sudo halt -p
