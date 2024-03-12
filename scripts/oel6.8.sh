@@ -1,8 +1,9 @@
 #!/bin/bash
 echo "Developed by Christopher M Johnston"
-echo "05/23/2020"
-echo "Configures RHEL 6.8 to be moved to OCI Bare Metal Infrastructure"
-sudo ln -sf /etc/systemd/system/multi-user.target /etc/systemd/system/default.target
+echo "03/11/2024"
+echo "Currently in BETA"
+echo "Configures OEL 6.8 to be moved to OCI VM Infrastructure"
+sudo chkconfig --level 3 multiuser
 sudo yum install dracut-network iscsi-initiator-utils xe-guest-utilities -y
 sudo service xe-linux-distribution start
 sudo chkconfig xe-linux-distribution on
