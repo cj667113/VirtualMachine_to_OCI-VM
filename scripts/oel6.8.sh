@@ -12,7 +12,7 @@ sudo sed -i '/^timeout=/ s/=.*/=2/' /boot/grub/grub.conf
 sudo sed -i '/^splashimage/ s/^/#/' /boot/grub/grub.conf
 sudo sed -i 's/\(kernel.*\)/\1 ip=dhcp console=ttyS0,9600/' /boot/grub/grub.conf
 echo "Grub Config Updated"
-echo "Scrubbed Hard Codded MAC"
+echo "Scrubbing Hard Coded MAC"
 for file in /etc/sysconfig/network-scripts/ifcfg-*; do
     # Check if the file exists and is a regular file
     if [ -f "$file" ]; then
@@ -21,7 +21,7 @@ for file in /etc/sysconfig/network-scripts/ifcfg-*; do
         echo "Hardcoded MAC removed from $file"
     fi
 done
-echo "Scrubbed Hard Codded MAC"
+echo "Scrubbed Hard Coded MAC"
 sudo stty -F /dev/ttyS0 speed 9600
 dmesg | grep console
 echo "Executing Dracut"
