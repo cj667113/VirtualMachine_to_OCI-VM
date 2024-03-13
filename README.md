@@ -19,7 +19,7 @@ Upload the appropriate shell script to your Virtual Machine and execute it.
 
 From there, you will need to import a custom image with the following parameters:
 	
-	Image Type = (VMDK)
-	Launch Mode = (PARAVIRTUALIZED)
+	Image Type = VMDK
+	Launch Mode = PARAVIRTUALIZED
   
 Launch a VM instance with new custom image that you created. You can create a console connection into the VM instance to watch the boot processes take place. After the instance is spun up, you can then ssh into it as you would your original Virtual Machine.
